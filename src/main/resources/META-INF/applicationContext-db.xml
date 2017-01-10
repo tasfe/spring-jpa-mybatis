@@ -62,7 +62,8 @@
         </property>
 
         <!-- entity package-->
-        <property name="packagesToScan" value="com.yougou.domain"></property>
+        <property name="packagesToScan" value="com.examples.v2.domain"></property>
+
         <property name="jpaProperties">
             <props>
                 <!-- 基本属性 -->
@@ -93,12 +94,12 @@
     <!-- 配置 SpringData -->
     <!-- 加入  jpa 的命名空间 -->
     <!-- base-package: 扫描base-package下所有继承于Repository<T,ID>的接口 -->
-    <jpa:repositories base-package="com.yougou.dao.jpa,com.api.v2.examples"
-                      factory-class="com.yougou.dao.jpa.base.BaseRepositoryFactoryBean"
+    <jpa:repositories base-package="com.examples.v2.dao"
+                      factory-class="com.springdata.extension.jpa.mybatis.base.BaseRepositoryFactoryBean"
                       entity-manager-factory-ref="entityManagerFactory"
                       transaction-manager-ref="transactionManagerJPA">
         <!-- 排除 BaseDao接口,或者在该接口上标注@NoRepositoryBean-->
-        <!--<exclude-filter type="assignable" expression="com.yougou.dao.jpa.base.BaseRepositoryository"/>-->
+        <!--<exclude-filter type="assignable" expression="com.springdata.jpa.extension.mybatis.v2.base.BaseRepositoryository"/>-->
     </jpa:repositories>
 
 
@@ -126,8 +127,10 @@
     <!-- sqlSessionFactory -->
     <bean name="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
+
         <!-- 指定 domain 路径,为Java类型命名一个短的别名,例如:com.yougou.domainn.Category 的别名是Category -->
-        <property name="typeAliasesPackage" value="com.yougou.domain"></property>
+        <property name="typeAliasesPackage" value="com.examples.v2.domain"></property>
+
         <!--  指定单个类
         <property name="typeAliases" value="com.yougou.domain."></property>-->
 
@@ -154,7 +157,7 @@
     </bean>
 
     <!-- scan for mappers and let them be autowired,类和xml在同一目录中,名称相同,则自动绑定  -->
-    <mybatis:scan base-package="com.yougou.dao.mapper"/>
+    <mybatis:scan base-package="com.examples.v2.dao"/>
 
     <!-- mybatis 事物托管给spring-->
     <bean name="transcationManagerMybatis" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
