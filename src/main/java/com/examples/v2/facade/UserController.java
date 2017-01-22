@@ -10,13 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * Created by tim on 17/1/9.
  */
+@Path("/")
 @Controller
+@Consumes({MediaType.APPLICATION_JSON})
 @Api(value = "/user", description = "用户接口")
 @RequestMapping(value = "/api/v2/")
 public class UserController {
@@ -29,9 +33,10 @@ public class UserController {
      *
      * @return
      */
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    @GET
+    @Path("users")
     @ResponseBody
-    @ApiOperation(value = "查询所有", notes = "查询所有用户信息")
+    @ApiOperation(value = "用户注册", notes = "注册用户")
     public Iterable<Category> findAll() {
         Map<String, String> result = new HashMap<String, String>();
 
