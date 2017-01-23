@@ -1,6 +1,7 @@
 package com.springweb.extension.swagger;
 
 import io.swagger.models.*;
+
 import io.swagger.models.auth.OAuth2Definition;
 
 import javax.servlet.ServletConfig;
